@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Helper methods related to requesting and receiving earthquake data from USGS.
+ * Helper methods related to requesting and receiving new data from google news.
  */
 public final class QueryUtils {
     /** Tag for the log messages */
@@ -36,7 +36,7 @@ public final class QueryUtils {
     private QueryUtils() {
     }
     /**
-     +     * Query the USGS dataset and return a list of {@link New} objects.
+     +     * Query the google dataset and return a list of {@link New} objects.
      +     */
     public static List<New> fetchNewData(String requestUrl) {
         // Create URL object
@@ -50,10 +50,10 @@ public final class QueryUtils {
             Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
 
-        // Extract relevant fields from the JSON response and create a list of {@link Earthquake}s
+        // Extract relevant fields from the JSON response and create a list of {@link New}s
         List<New> news = extractFeatureFromJson(jsonResponse);
 
-        // Return the list of {@link Earthquake}s
+        // Return the list of {@link New}s
         return news;
     }
 
@@ -99,7 +99,7 @@ public final class QueryUtils {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Problem retrieving the earthquake JSON results.", e);
+            Log.e(LOG_TAG, "Problem retrieving the new JSON results.", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -160,17 +160,17 @@ public final class QueryUtils {
                 // For a given earthquake, extract the JSONObject associated with the
                 // key called "properties", which represents a list of all properties
                 // for that earthquake.
-                JSONObject articles = currentNew.getJSONObject("articles");
 
-                String title =articles.getString("title");
-                String author =articles.getString("author");
-                String publishAt =articles.getString("publishAt");
-                String description =articles.getString("description");
+
+                String title =currentNew.getString("title");
+                String author =currentNew.getString("author");
+                String publishedAt =currentNew.getString("publishedAt");
+                String description =currentNew.getString("description");
                 // Extract the value for the key called "url"
-                String url = articles.getString("url");
+                String url = currentNew.getString("url");
                 // Create a new {@link New} object with the title, author, publishAt,,description
                 // and url from the JSON response.
-                New mNew = new New(title,author,publishAt,description,url);
+                New mNew = new New(title,author,publishedAt,description,url);
                 news.add(mNew);
 
             }
@@ -180,10 +180,10 @@ public final class QueryUtils {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
-            Log.e("QueryUtils", "Problem parsing the earthquake JSON results", e);
+            Log.e("QueryUtils", "Problem parsing the new JSON results", e);
         }
 
-        // Return the list of earthquakes
+        // Return the list of news
         return news;
     }
 
