@@ -26,8 +26,11 @@ import java.util.List;
  * Helper methods related to requesting and receiving new data from google news.
  */
 public final class QueryUtils {
-    /** Tag for the log messages */
+    /**
+     * Tag for the log messages
+     */
     private static final String LOG_TAG = QueryUtils.class.getSimpleName();
+
     /**
      * Create a private constructor because no one should ever create a {@link QueryUtils} object.
      * This class is only meant to hold static variables and methods, which can be accessed
@@ -35,9 +38,10 @@ public final class QueryUtils {
      */
     private QueryUtils() {
     }
+
     /**
-     +     * Query the google dataset and return a list of {@link New} objects.
-     +     */
+     * Query the google dataset and return a list of {@link New} objects.
+     */
     public static List<New> fetchNewData(String requestUrl) {
         // Create URL object
         URL url = createUrl(requestUrl);
@@ -58,8 +62,8 @@ public final class QueryUtils {
     }
 
     /**
-     +     * Returns new URL object from the given string URL.
-     +     */
+     * Returns new URL object from the given string URL.
+     */
     private static URL createUrl(String stringUrl) {
         URL url = null;
         try {
@@ -71,8 +75,8 @@ public final class QueryUtils {
     }
 
     /**
-     +     * Make an HTTP request to the given URL and return a String as the response.
-     +     */
+     * Make an HTTP request to the given URL and return a String as the response.
+     */
     private static String makeHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
 
@@ -113,10 +117,11 @@ public final class QueryUtils {
         }
         return jsonResponse;
     }
+
     /**
-     +     * Convert the {@link InputStream} into a String which contains the
-     +     * whole JSON response from the server.
-     +     */
+     * Convert the {@link InputStream} into a String which contains the
+     * whole JSON response from the server.
+     */
     private static String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder output = new StringBuilder();
         if (inputStream != null) {
@@ -136,11 +141,11 @@ public final class QueryUtils {
      * parsing the given JSON response.
      */
     private static List<New> extractFeatureFromJson(String newJSON) {
-                // If the JSON string is empty or null, then return early.
-                        if (TextUtils.isEmpty(newJSON)) {
-                        return null;
-                    }
-        // Create an empty ArrayList that we can start adding earthquakes to
+        // If the JSON string is empty or null, then return early.
+        if (TextUtils.isEmpty(newJSON)) {
+            return null;
+        }
+        // Create an empty ArrayList that we can start adding news to
         List<New> news = new ArrayList<>();
 
         // Try to parse the JSON response string. If there's a problem with the way the JSON
@@ -151,26 +156,26 @@ public final class QueryUtils {
 
             // Create a JSONObject from the JSON response string
             JSONObject baseJsonResponse = new JSONObject(newJSON);
-            // Extract the JSONArray associated with the key called "features",
-            // which represents a list of features (or earthquakes).
+            // Extract the JSONArray associated with the key called "articles",
+            // which represents a list of articles (or news).
             JSONArray newArray = baseJsonResponse.getJSONArray("articles");
-            for (int i=0; i<newArray.length(); i++){
+            for (int i = 0; i < newArray.length(); i++) {
 
-                JSONObject currentNew=newArray.getJSONObject(i);
-                // For a given earthquake, extract the JSONObject associated with the
-                // key called "properties", which represents a list of all properties
-                // for that earthquake.
+                JSONObject currentNew = newArray.getJSONObject(i);
+                // For a given new, extract the JSONObject associated
+
+                // for that new.
 
 
-                String title =currentNew.getString("title");
-                String author =currentNew.getString("author");
-                String publishedAt =currentNew.getString("publishedAt");
-                String description =currentNew.getString("description");
+                String title = currentNew.getString("title");
+                String author = currentNew.getString("author");
+                String publishedAt = currentNew.getString("publishedAt");
+                String description = currentNew.getString("description");
                 // Extract the value for the key called "url"
                 String url = currentNew.getString("url");
                 // Create a new {@link New} object with the title, author, publishAt,,description
                 // and url from the JSON response.
-                New mNew = new New(title,author,publishedAt,description,url);
+                New mNew = new New(title, author, publishedAt, description, url);
                 news.add(mNew);
 
             }

@@ -14,27 +14,26 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
-  * An {@link NewAdapter} knows how to create a list item layout for each new
-  * in the data source (a list of {@link New} objects).
-  * These list item layouts will be provided to an adapter view like ListView
+ * An {@link NewAdapter} knows how to create a list item layout for each new
+ * in the data source (a list of {@link New} objects).
+ * These list item layouts will be provided to an adapter view like ListView
  * to be displayed to the user.
  */
 public class NewAdapter extends ArrayAdapter<New> {
 
     /**
-         * Constructs a new {@link NewAdapter}.
-          *
-        * @param context of the app
-         * @param news is the list of news, which is the data source of the adapter
+     * Constructs a new {@link NewAdapter}.
+     *
+     * @param context of the app
+     * @param news    is the list of news, which is the data source of the adapter
      */
     public NewAdapter(Context context, List<New> news) {
         super(context, 0, news);
     }
 
     /**
-         * Returns a list item view that displays information about the new at the given position
-        * in the list of news.
-
+     * Returns a list item view that displays information about the new at the given position
+     * in the list of news.
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

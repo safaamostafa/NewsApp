@@ -25,7 +25,9 @@ public class New {
      */
     private String mDescription;
 
-    /** Website URL of the earthquake */
+    /**
+     * Website URL of the new
+     */
     private String mUrl;
 
     /**
@@ -33,11 +35,11 @@ public class New {
      *
      * @param title       is the title of the new
      * @param author      is the Author of the new
-     * @param publishedAt   is the date of the new
+     * @param publishedAt is the date of the new
      * @param description is the description of the new
-     * @param url is the website URL to find more details about the earthquake
+     * @param url         is the website URL to find more details about the new
      */
-    public New(String title, String author, String publishedAt, String description,String url) {
+    public New(String title, String author, String publishedAt, String description, String url) {
         mTitle = title;
         mAuthor = author;
         mPublishedAt = publishedAt;
@@ -74,7 +76,7 @@ public class New {
     }
 
     /**
-     * Returns the website URL to find more information about the earthquake.
+     * Returns the website URL to find more information about the new
      */
     public String getUrl() {
         return mUrl;

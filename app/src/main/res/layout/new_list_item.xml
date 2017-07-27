@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="16dp">
 
     <TextView
@@ -13,8 +13,7 @@
         android:layout_marginBottom="@dimen/layout_marginBottom"
         android:textColor="@color/colorTitle"
         android:textSize="@dimen/titleTextSize"
-        tools:text="title"
-        />
+        tools:text="title" />
 
     <TextView
         android:id="@+id/author"
@@ -23,7 +22,8 @@
         android:layout_marginBottom="@dimen/layout_marginBottom"
         android:textColor="@color/colorAuthor"
         android:textSize="@dimen/authorTextSize"
-        tools:text="author"/>
+        tools:text="author" />
+
     <TextView
         android:id="@+id/publishedAt"
         android:layout_width="wrap_content"
@@ -31,7 +31,8 @@
         android:layout_marginBottom="@dimen/layout_marginBottom"
         android:textColor="@color/colorPublishedAt"
         android:textSize="@dimen/publishedAtTextSize"
-        tools:text="publishedAt"/>
+        tools:text="publishedAt" />
+
     <TextView
         android:id="@+id/description"
         android:layout_width="wrap_content"
@@ -39,7 +40,7 @@
         android:layout_marginBottom="@dimen/layout_marginBottom"
         android:textColor="@color/colorDescription"
         android:textSize="@dimen/descriptionTextSize"
-        tools:text="description"/>
+        tools:text="description" />
 
 
 </LinearLayout>
